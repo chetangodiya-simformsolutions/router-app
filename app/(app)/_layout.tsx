@@ -3,8 +3,13 @@ import React from 'react';
 
 import Loading from '@/components/Loading';
 import { useAuth } from '@/context';
+import { Platform } from 'react-native';
 
-export default function TabLayout() {
+export const unstable_settings = {
+  initialRouteName: '(tabs)',
+};
+
+export default function SessionLayout() {
   const { isLoading, session } = useAuth();
 
   if (isLoading) return <Loading />;
@@ -17,7 +22,16 @@ export default function TabLayout() {
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+      <Stack.Screen
+        name="modal"
+        options={{
+          presentation: Platform.OS === 'web' ? 'transparentModal' : 'modal',
+          ...(Platform.OS === 'web' && {
+            animation: 'fade',
+            headerShown: false,
+          }),
+        }}
+      />
     </Stack>
   );
 }

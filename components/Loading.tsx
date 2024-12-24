@@ -9,12 +9,14 @@ const Loading = () => {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'row',
-        gap: 5,
+        gap: 50,
       }}
     >
-      <ActivityIndicator />
-      <Text>Loading...</Text>
+      <Text style={{ fontSize: 21 }}>My awesome splash screen</Text>
+      <View style={{ flexDirection: 'row', gap: 10 }}>
+        <ActivityIndicator />
+        <Text>Loading...</Text>
+      </View>
     </View>
   );
 };
