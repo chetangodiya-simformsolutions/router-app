@@ -7,6 +7,12 @@ export default function Tab() {
     <View style={styles.container}>
       <Text>Tab [Home]</Text>
       <Button
+        title="profile"
+        onPress={() => {
+          router.navigate('/profile');
+        }}
+      />
+      <Button
         title="modal"
         onPress={() => {
           router.navigate('/modal');
@@ -21,5 +27,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    gap: 10,
   },
 });
