@@ -1,4 +1,4 @@
-import { useSession } from '@/hooks';
+import { useSession } from '@/src/hooks';
 import { createContext, PropsWithChildren, useContext } from 'react';
 
 const AuthContext = createContext<{

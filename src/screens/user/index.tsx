@@ -1,4 +1,4 @@
-import { Text, View } from '@/components/Themed';
+import { Text, View } from '@/src/components/Themed';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 

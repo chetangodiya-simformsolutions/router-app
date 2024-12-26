@@ -1,5 +1,5 @@
-import { Text, View } from '@/components/Themed';
-import { useAuth } from '@/context';
+import { Text, View } from '@/src/components/Themed';
+import { useAuth } from '@/src/context';
 import { StyleSheet, Button } from 'react-native';
 
 export default function Tab() {

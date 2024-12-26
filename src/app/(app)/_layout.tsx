@@ -1,8 +1,8 @@
 import { Redirect, Stack } from 'expo-router';
 import React from 'react';
 
-import Loading from '@/components/Loading';
-import { useAuth } from '@/context';
+import Loading from '@/src/components/Loading';
+import { useAuth } from '@/src/context';
 import { Platform } from 'react-native';
 
 export const unstable_settings = {

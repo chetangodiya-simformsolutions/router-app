@@ -1,4 +1,4 @@
-import { Text, View } from '@/components/Themed';
+import { Text, View } from '@/src/components/Themed';
 import React from 'react';
 
 const Chats = () => {

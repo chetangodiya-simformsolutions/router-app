@@ -1,5 +1,5 @@
-import { Text, View } from '@/components/Themed';
-import { useAuth } from '@/context/AuthProvider';
+import { Text, View } from '@/src/components/Themed';
+import { useAuth } from '@/src/context/AuthProvider';
 import { router } from 'expo-router';
 import React from 'react';
 import { Button } from 'react-native';

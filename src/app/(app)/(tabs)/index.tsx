@@ -1,4 +1,4 @@
-import { Text, View } from '@/components/Themed';
+import { Text, View } from '@/src/components/Themed';
 import { router } from 'expo-router';
 import { Button, StyleSheet } from 'react-native';
 
