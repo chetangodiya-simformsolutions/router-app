@@ -1,6 +1,7 @@
 import { View, Text, Button } from 'react-native';
 import React from 'react';
 import { router, Stack } from 'expo-router';
+import Animated from 'react-native-reanimated';
 
 const Profile = () => {
   return (
@@ -12,9 +13,13 @@ const Profile = () => {
         }}
       />
       <Text>ProfileDetail</Text>
+      <Animated.View
+        style={{ height: 50, width: 100, backgroundColor: 'red' }}
+        sharedTransitionTag="check"
+      />
       <Button
         title="profile activity"
-        onPress={() => router.navigate('/(app)/profile/profileActivity')}
+        onPress={() => router.push('/(app)/profile/profileActivity')}
       />
     </View>
   );
