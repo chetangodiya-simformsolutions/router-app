@@ -4,7 +4,7 @@ import React from 'react';
 import Animated from 'react-native-reanimated';
 
 const User = () => {
-  const { id } = useLocalSearchParams();
+  const { id } = useLocalSearchParams<{ id: string }>();
 
   return (
     <View style={{ flex: 1 }}>

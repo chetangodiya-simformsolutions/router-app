@@ -1,9 +1,10 @@
 import { View, Text, Button } from 'react-native';
 import React from 'react';
-import { router, Stack } from 'expo-router';
+import { router, Stack, useNavigation } from 'expo-router';
 import Animated from 'react-native-reanimated';
 
 const Profile = () => {
+  const navigation = useNavigation();
   return (
     <View>
       <Stack.Screen
@@ -19,7 +20,9 @@ const Profile = () => {
       />
       <Button
         title="profile activity"
-        onPress={() => router.push('/(app)/profile/profileActivity')}
+        onPress={() => {
+          router.push('./profileActivity', { relativeToDirectory: true });
+        }}
       />
     </View>
   );
