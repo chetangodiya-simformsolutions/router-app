@@ -51,7 +51,10 @@ const Feeds = () => {
         renderItem={({ item }) => {
           return (
             <Link href={`/user/${item}`} asChild key={item}>
-              <Pressable style={{ padding: SPACER / 2 }}>
+              <Pressable
+                style={{ padding: SPACER / 2 }}
+                // onPress={() => router.navigate(`/user/${item}`)}
+              >
                 <Text>User {item}</Text>
                 <Image
                   source={{

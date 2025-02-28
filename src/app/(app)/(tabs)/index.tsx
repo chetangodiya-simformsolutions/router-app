@@ -1,10 +1,8 @@
 import { Text, View } from '@/src/components/Themed';
-import { router, useNavigation } from 'expo-router';
+import { router } from 'expo-router';
 import { Button, StyleSheet } from 'react-native';
 
 export default function Tab() {
-  const navigation = useNavigation();
-
   return (
     <View style={styles.container}>
       <Text>Tab [Home]</Text>
@@ -17,7 +15,12 @@ export default function Tab() {
       <Button
         title="profile activity"
         onPress={() => {
-          router.push('/profile');
+          /**
+           * equivalent to
+           * navigation.navigate("profile",{
+           *  screen: "profileActivity"
+           * })
+           */
           router.push('/profile/profileActivity');
         }}
       />

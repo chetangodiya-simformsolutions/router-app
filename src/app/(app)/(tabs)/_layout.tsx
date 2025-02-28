@@ -1,12 +1,16 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Tabs } from 'expo-router';
+import { Slot, Tabs } from 'expo-router';
 
 export default function TabLayout() {
+  return <Slot />;
+  return <Tabs screenOptions={{ headerShown: false }} />;
+
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: '#rgb(23, 104, 225)' }}>
       <Tabs.Screen
         name="(drawer)"
         options={{
+          headerShown: false,
           title: 'Drawer',
           tabBarIcon: ({ color }) => (
             <FontAwesome size={28} name="cube" color={color} />

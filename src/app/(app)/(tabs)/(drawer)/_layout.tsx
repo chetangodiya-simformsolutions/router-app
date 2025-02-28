@@ -1,9 +1,15 @@
-import { Stack } from 'expo-router';
+import { Slot, Stack } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const DrawerLayout = () => {
+  return <Slot />;
+  return (
+    <>
+      <Drawer />
+    </>
+  );
   return (
     <GestureHandlerRootView>
       <Stack.Screen options={{ headerShown: false }} />
