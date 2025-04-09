@@ -5,7 +5,7 @@ import {
   ThemeProvider,
 } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Slot, Stack } from 'expo-router';
+import { Slot, Stack, useGlobalSearchParams, usePathname, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
@@ -26,6 +26,15 @@ export const unstable_settings = {
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+const useVars = ()=>{
+    const globalParams = useGlobalSearchParams()
+    const segments = useSegments()
+    const pathName = usePathname()
+    
+    console.log("globalParams: ", globalParams);
+    console.log("segments: ", segments);
+    console.log("pathName: ", pathName);
+}
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../../assets/fonts/SpaceMono-Regular.ttf'),
@@ -52,6 +61,7 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  useVars();
 
   return (
     <AuthProvider>

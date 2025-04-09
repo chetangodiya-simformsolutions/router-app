@@ -20,7 +20,7 @@ const SignIn = () => {
         title="Signin"
         onPress={() => {
           signIn();
-          router.replace('/(app)/(tabs)/(drawer)/feeds');
+          router.replace('/(app)/(tabs)');
         }}
       />
     </View>

@@ -32,6 +32,12 @@ const ProfileActivity = () => {
         style={{ height: 200, width: 200, backgroundColor: 'red' }}
         sharedTransitionTag="check"
       />
+      <Button
+        title="React navigation drawer"
+        onPress={() => {
+          router.navigate('/profile/profileDrawer');
+        }}
+      />
     </View>
   );
 };
