@@ -8,7 +8,8 @@ description: "Task list template for feature implementation"
 **Input**: Design documents from `/specs/[###-feature-name]/`
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
+**Tests**: E2E tests are REQUIRED for critical user journeys. Unit test tasks are OPTIONAL and
+should be omitted unless explicitly requested by the feature specification.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -23,6 +24,7 @@ description: "Task list template for feature implementation"
 - **Single project**: `src/`, `tests/` at repository root
 - **Web app**: `backend/src/`, `frontend/src/`
 - **Mobile**: `api/src/`, `ios/src/` or `android/src/`
+- **Expo mobile (this repository)**: `src/app/`, `src/components/`, `src/theme/`, `src/storage/`, `e2e/`
 - Paths shown below assume single project - adjust based on plan.md structure
 
 <!-- 
@@ -79,21 +81,21 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 1 (OPTIONAL - only if tests requested) ⚠️
+### Tests for User Story 1 (E2E REQUIRED) ⚠️
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T010 [P] [US1] E2E test for [user journey] in e2e/[name].spec.ts
+- [ ] T011 [P] [US1] E2E persistence/restart scenario for [journey] in e2e/[name]-persistence.spec.ts
 
 ### Implementation for User Story 1
 
-- [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
-- [ ] T013 [P] [US1] Create [Entity2] model in src/models/[entity2].py
-- [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
-- [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
+- [ ] T012 [P] [US1] Reuse/extend shared component(s) in src/components/[component].tsx
+- [ ] T013 [P] [US1] Add or update theme token usage in src/theme/[token-file].ts
+- [ ] T014 [US1] Implement feature flow in src/app/[route].tsx with Expo Router
+- [ ] T015 [US1] Add persistence logic in src/storage/[feature-storage].ts
 - [ ] T016 [US1] Add validation and error handling
-- [ ] T017 [US1] Add logging for user story 1 operations
+- [ ] T017 [US1] Document reuse justification for any new component creation
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -105,17 +107,17 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
+### Tests for User Story 2 (E2E REQUIRED) ⚠️
 
-- [ ] T018 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T019 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T018 [P] [US2] E2E test for [user journey] in e2e/[name].spec.ts
+- [ ] T019 [P] [US2] E2E persistence/restart scenario for [journey] in e2e/[name]-persistence.spec.ts
 
 ### Implementation for User Story 2
 
-- [ ] T020 [P] [US2] Create [Entity] model in src/models/[entity].py
-- [ ] T021 [US2] Implement [Service] in src/services/[service].py
-- [ ] T022 [US2] Implement [endpoint/feature] in src/[location]/[file].py
-- [ ] T023 [US2] Integrate with User Story 1 components (if needed)
+- [ ] T020 [P] [US2] Reuse/extend shared components for story in src/components/
+- [ ] T021 [US2] Implement supporting services in src/services/[service].ts
+- [ ] T022 [US2] Implement feature route/screen in src/app/[route].tsx
+- [ ] T023 [US2] Integrate persistence + theme compliance with User Story 1 components
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -127,16 +129,16 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
+### Tests for User Story 3 (E2E REQUIRED) ⚠️
 
-- [ ] T024 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T025 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T024 [P] [US3] E2E test for [user journey] in e2e/[name].spec.ts
+- [ ] T025 [P] [US3] E2E persistence/restart scenario for [journey] in e2e/[name]-persistence.spec.ts
 
 ### Implementation for User Story 3
 
-- [ ] T026 [P] [US3] Create [Entity] model in src/models/[entity].py
-- [ ] T027 [US3] Implement [Service] in src/services/[service].py
-- [ ] T028 [US3] Implement [endpoint/feature] in src/[location]/[file].py
+- [ ] T026 [P] [US3] Reuse/extend shared components in src/components/
+- [ ] T027 [US3] Implement supporting services in src/services/[service].ts
+- [ ] T028 [US3] Implement feature route/screen in src/app/[route].tsx
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -153,7 +155,7 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] TXXX [P] Documentation updates in docs/
 - [ ] TXXX Code cleanup and refactoring
 - [ ] TXXX Performance optimization across all stories
-- [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
+- [ ] TXXX [P] Additional E2E hardening scenarios in e2e/
 - [ ] TXXX Security hardening
 - [ ] TXXX Run quickstart.md validation
 
@@ -178,7 +180,7 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Within Each User Story
 
-- Tests (if included) MUST be written and FAIL before implementation
+- E2E tests MUST be defined and fail before implementation
 - Models before services
 - Services before endpoints
 - Core implementation before integration
@@ -198,9 +200,9 @@ Examples of foundational tasks (adjust based on your project):
 ## Parallel Example: User Story 1
 
 ```bash
-# Launch all tests for User Story 1 together (if tests requested):
-Task: "Contract test for [endpoint] in tests/contract/test_[name].py"
-Task: "Integration test for [user journey] in tests/integration/test_[name].py"
+# Launch all E2E tests for User Story 1 together:
+Task: "E2E test for [user journey] in e2e/[name].spec.ts"
+Task: "E2E persistence/restart scenario in e2e/[name]-persistence.spec.ts"
 
 # Launch all models for User Story 1 together:
 Task: "Create [Entity1] model in src/models/[entity1].py"
@@ -245,7 +247,7 @@ With multiple developers:
 - [P] tasks = different files, no dependencies
 - [Story] label maps task to specific user story for traceability
 - Each user story should be independently completable and testable
-- Verify tests fail before implementing
+- Verify E2E tests fail before implementing
 - Commit after each task or logical group
 - Stop at any checkpoint to validate story independently
 - Avoid: vague tasks, same file conflicts, cross-story dependencies that break independence

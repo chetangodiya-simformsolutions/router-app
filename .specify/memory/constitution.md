@@ -1,50 +1,109 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: N/A (template) -> 1.0.0
+- Modified principles:
+	- Template Principle 1 -> I. TypeScript-First Expo Architecture
+	- Template Principle 2 -> II. Component Reuse Before Creation
+	- Template Principle 3 -> III. Theme-Ready UI as a Baseline
+	- Template Principle 4 -> IV. Persistent Data as Default Behavior
+	- Template Principle 5 -> V. E2E-Only Verification Gates
+- Added sections:
+	- Technology Standards
+	- Delivery Workflow
+- Removed sections:
+	- None
+- Templates requiring updates:
+	- ✅ updated: .specify/templates/plan-template.md
+	- ✅ updated: .specify/templates/spec-template.md
+	- ✅ updated: .specify/templates/tasks-template.md
+	- ✅ reviewed (no changes required): .github/prompts/speckit.constitution.prompt.md
+	- ⚠ pending: .specify/templates/commands/*.md (directory not present)
+- Follow-up TODOs:
+	- None
+-->
+
+# Router App Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. TypeScript-First Expo Architecture
+All application code MUST be authored in TypeScript. Mobile development MUST use Expo,
+and app navigation MUST use Expo Router. Any proposal to use non-TypeScript files for
+runtime logic or a different navigation framework requires an explicit architecture
+exception approved before implementation.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Rationale: A unified stack reduces integration bugs, lowers onboarding friction, and
+keeps build/runtime behavior predictable across iOS and Android.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Component Reuse Before Creation
+Feature work MUST reuse existing components before creating new ones. New components MUST
+be introduced only when existing building blocks cannot satisfy requirements without
+breaking readability or maintainability, and the reason MUST be documented in the feature
+plan.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+Rationale: Reuse improves consistency, shortens delivery time, and reduces long-term UI
+maintenance costs.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Theme-Ready UI as a Baseline
+Every user-facing component MUST support the project theme system. Colors, typography,
+spacing, and state styles MUST be sourced from shared theme tokens or theme helpers,
+not hardcoded inline values.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Rationale: Theme support is required for consistent branding, accessibility, and scalable
+visual evolution.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Persistent Data as Default Behavior
+User and business data MUST persist across app restarts unless data is explicitly marked
+ephemeral in the specification. Persistence mechanisms and failure handling MUST be defined
+during planning for each persisted data category.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Rationale: Data loss is a product defect; persistence-by-default protects user trust and
+supports offline or interrupted usage patterns.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. E2E-Only Verification Gates
+End-to-end testing is REQUIRED for each critical user journey and release candidate.
+Unit testing is NOT a default requirement for this project and MUST NOT be added as a
+quality gate unless a later constitutional amendment introduces it.
+
+Rationale: The current quality strategy prioritizes full-flow confidence in a mobile app
+where integration boundaries and navigation behavior are primary risk areas.
+
+## Technology Standards
+
+- Runtime stack MUST remain TypeScript + Expo + Expo Router.
+- Shared components MUST be organized for reuse and imported through stable paths.
+- Theme primitives MUST be centralized and consumed by all visual components.
+- Persisted data MUST define storage location, serialization format, and restore behavior.
+- Test plans MUST include E2E coverage for primary, error, and persistence-recovery flows.
+
+## Delivery Workflow
+
+- Every spec and plan MUST include a Constitution Check that explicitly validates all
+five core principles.
+- Pull requests MUST describe how component reuse, theming, persistence, and E2E coverage
+were implemented.
+- Reviews MUST block merges when hardcoded theme values, unnecessary duplicate components,
+or non-persistent required data paths are detected.
+- Release readiness MUST include successful E2E execution evidence for critical journeys.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution is the source of truth for engineering decisions in this repository.
+When guidance conflicts, this document takes precedence.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Amendment process:
+1. Propose changes in a pull request that includes rationale and impacted templates/docs.
+2. Obtain approval from project maintainers.
+3. Update dependent templates and workflows in the same change.
+
+Versioning policy:
+- MAJOR: Removes or redefines an existing principle/governance rule in a backward-
+incompatible manner.
+- MINOR: Adds a new principle/section or materially expands mandatory guidance.
+- PATCH: Clarifies language without changing normative meaning.
+
+Compliance expectations:
+- Plans, specs, tasks, and PR reviews MUST include constitution compliance checks.
+- Violations MUST be documented with explicit waiver approval and expiration criteria.
+
+**Version**: 1.0.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-23

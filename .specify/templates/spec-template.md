@@ -7,6 +7,9 @@
 
 ## User Scenarios & Testing *(mandatory)*
 
+All scenarios MUST be executable as end-to-end mobile journeys. Do not define unit-test-only
+validation as the primary acceptance path.
+
 <!--
   IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
   Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
@@ -74,6 +77,8 @@
 
 - What happens when [boundary condition]?
 - How does system handle [error scenario]?
+- How does the flow recover persisted state after app restart/reinstall conditions?
+- What happens when required theme tokens are missing or invalid?
 
 ## Requirements *(mandatory)*
 
@@ -89,6 +94,11 @@
 - **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
 - **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
 - **FR-005**: System MUST [behavior, e.g., "log all security events"]
+- **FR-006**: New UI MUST reuse existing shared components where feasible; new components MUST
+  include reuse justification.
+- **FR-007**: All user-facing components MUST support project theming through shared tokens/helpers.
+- **FR-008**: All non-ephemeral data MUST persist across app restarts.
+- **FR-009**: Critical user journeys MUST have end-to-end acceptance scenarios.
 
 *Example of marking unclear requirements:*
 

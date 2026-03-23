@@ -17,12 +17,12 @@
   the iteration process.
 -->
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]  
+**Language/Version**: TypeScript (REQUIRED)  
+**Primary Dependencies**: Expo, Expo Router (REQUIRED)  
+**Storage**: Persistent client storage required for non-ephemeral data (e.g., AsyncStorage/SecureStore/SQLite)  
+**Testing**: E2E tests required; unit tests not required by constitution  
+**Target Platform**: iOS + Android via Expo
+**Project Type**: Mobile app (Expo managed workflow)  
 **Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
 **Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
 **Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
@@ -31,7 +31,13 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- [ ] TypeScript-only runtime code (no unapproved JS runtime modules)
+- [ ] Expo and Expo Router used for app/runtime/navigation decisions
+- [ ] Reuse analysis completed before creating new components
+- [ ] All new/updated UI components consume theme tokens/helpers
+- [ ] Data persistence defined for every non-ephemeral data path
+- [ ] E2E coverage planned for critical user journeys
+- [ ] No unit-test quality gate added unless constitution amendment exists
 
 ## Project Structure
 
@@ -83,12 +89,17 @@ frontend/
 │   └── services/
 └── tests/
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
+# Option 3: Expo mobile app (DEFAULT for this repository)
+src/
+├── app/                # Expo Router screens/routes
+├── components/         # Reusable themed components
+├── features/           # Feature modules composed from shared components
+├── theme/              # Design tokens + theme helpers
+├── storage/            # Persistence adapters and repositories
+└── services/           # API/client/domain services
 
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+e2e/
+└── [journey-focused E2E suites]
 ```
 
 **Structure Decision**: [Document the selected structure and reference the real
@@ -101,4 +112,4 @@ directories captured above]
 | Violation | Why Needed | Simpler Alternative Rejected Because |
 |-----------|------------|-------------------------------------|
 | [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+| [e.g., New non-reusable component] | [specific UX/behavior gap] | [why extending shared component is insufficient] |
