@@ -17,10 +17,10 @@
 
 **Purpose**: Create base structure and feature scaffolding in the existing Expo Router stack.
 
-- [ ] T001 Create base Expo Router and feature folder structure in src/app/(tabs)/_layout.tsx
-- [ ] T002 Create initial shared domain type scaffold in src/types/todo.ts
-- [ ] T003 [P] Create initial theme mode type scaffold in src/types/theme.ts
-- [ ] T004 [P] Create storage key constants for todos/history/theme in src/storage/keys.ts
+- [x] T001 Create base Expo Router and feature folder structure in src/app/(tabs)/_layout.tsx
+- [x] T002 Create initial shared domain type scaffold in src/types/todo.ts
+- [x] T003 [P] Create initial theme mode type scaffold in src/types/theme.ts
+- [x] T004 [P] Create storage key constants for todos/history/theme in src/storage/keys.ts
 
 ---
 
@@ -30,16 +30,16 @@
 
 **⚠️ CRITICAL**: Complete this phase before implementing user stories.
 
-- [ ] T005 Implement app-level provider host for theme and persisted state in src/app/_layout.tsx
-- [ ] T006 Implement exactly two primary tabs (Todos, Settings) in src/app/(tabs)/_layout.tsx
-- [ ] T007 [P] Implement light/dark/default theme tokens and palettes in src/theme/tokens.ts
-- [ ] T008 [P] Implement safe JSON persistence adapter with guard helpers in src/storage/persistence.ts
-- [ ] T009 Extend Todo and related entities with optional templateId metadata in src/types/todo.ts
-- [ ] T010 Implement built-in predefined template catalog and validation helpers in src/constants/todoTemplates.ts
-- [ ] T011 Implement migration-safe restore helpers with unknown template fallback in src/storage/todoMigrations.ts
-- [ ] T012 Implement shared todo repository for active/completed/theme persistence in src/storage/todoRepository.ts
-- [ ] T038 [P] Produce component reuse audit (existing component considered, reuse decision, rationale) in specs/001-todo-theme-tabs/checklists/component-reuse-audit.md
-- [ ] T039 Link approved new-component rationale entries from reuse audit in specs/001-todo-theme-tabs/plan.md
+- [x] T005 Implement app-level provider host for theme and persisted state in src/app/_layout.tsx
+- [x] T006 Implement exactly two primary tabs (Todos, Settings) in src/app/(tabs)/_layout.tsx
+- [x] T007 [P] Implement light/dark/default theme tokens and palettes in src/theme/tokens.ts
+- [x] T008 [P] Implement safe JSON persistence adapter with guard helpers and in-memory fallback path for AsyncStorage failures in src/storage/persistence.ts
+- [x] T009 Extend Todo and related entities with optional templateId metadata in src/types/todo.ts
+- [x] T010 Implement built-in predefined template catalog and validation helpers in src/constants/todoTemplates.ts
+- [x] T011 Implement migration-safe restore helpers with unknown template fallback in src/storage/todoMigrations.ts
+- [x] T012 Implement shared todo repository for active/completed/theme persistence in src/storage/todoRepository.ts
+- [x] T038 [P] Produce component reuse audit (existing component considered, reuse decision, rationale) in specs/001-todo-theme-tabs/checklists/component-reuse-audit.md
+- [x] T039 Link approved new-component rationale entries from reuse audit in specs/001-todo-theme-tabs/plan.md
 
 **Checkpoint**: Foundation is ready; user story phases can proceed.
 
@@ -53,12 +53,12 @@
 
 ### Implementation for User Story 1
 
-- [ ] T013 [P] [US1] Implement active todo item row with complete and delete actions in src/components/todos/ActiveTodoItem.tsx
-- [ ] T014 [P] [US1] Implement date-only due-date field and validation messaging in src/components/todos/DueDateField.tsx
-- [ ] T015 [US1] Implement todo create form with required title and due-date validation in src/components/todos/TodoForm.tsx
-- [ ] T016 [US1] Implement Todos tab screen wiring create/complete/delete journeys in src/app/(tabs)/todos.tsx
-- [ ] T017 [US1] Wire active-to-completed transitions and delete persistence behavior in src/storage/todoRepository.ts
-- [ ] T018 [US1] Document manual E2E checklist for create/complete/delete/restart in specs/001-todo-theme-tabs/checklists/e2e-us1.md
+- [x] T013 [P] [US1] Implement active todo item row with complete and delete actions in src/components/todos/ActiveTodoItem.tsx
+- [x] T014 [P] [US1] Implement date-only due-date field and validation messaging in src/components/todos/DueDateField.tsx
+- [x] T015 [US1] Implement todo create form with required title and due-date validation in src/components/todos/TodoForm.tsx
+- [x] T016 [US1] Implement Todos tab screen wiring create/complete/delete journeys in src/app/(tabs)/todos.tsx
+- [x] T017 [US1] Wire active-to-completed transitions and delete persistence behavior in src/storage/todoRepository.ts
+- [x] T018 [US1] Document manual E2E checklist for create/complete/delete/restart in specs/001-todo-theme-tabs/checklists/e2e-us1.md
 
 **Checkpoint**: User Story 1 is independently functional and manually verifiable.
 
@@ -72,11 +72,11 @@
 
 ### Implementation for User Story 2
 
-- [ ] T019 [P] [US2] Implement theme selection control for Light/Dark/Device Default in src/components/settings/ThemeSelector.tsx
-- [ ] T020 [P] [US2] Implement device-theme resolution hook for Device Default mode in src/theme/useResolvedTheme.ts
-- [ ] T021 [US2] Integrate theme selection and immediate app-wide apply in src/app/(tabs)/settings.tsx
-- [ ] T022 [US2] Implement theme preference persistence with corrupted-data fallback in src/storage/themeStorage.ts
-- [ ] T023 [US2] Document manual E2E checklist for theme switch and restart persistence in specs/001-todo-theme-tabs/checklists/e2e-us2.md
+- [x] T019 [P] [US2] Implement theme selection control for Light/Dark/Device Default in src/components/settings/ThemeSelector.tsx
+- [x] T020 [P] [US2] Implement device-theme resolution hook for Device Default mode in src/theme/useResolvedTheme.ts
+- [x] T021 [US2] Integrate theme selection and immediate app-wide apply in src/app/(tabs)/settings.tsx
+- [x] T022 [US2] Implement theme preference persistence with corrupted-data fallback in src/storage/themeStorage.ts
+- [x] T023 [US2] Document manual E2E checklist for theme switch and restart persistence in specs/001-todo-theme-tabs/checklists/e2e-us2.md
 
 **Checkpoint**: User Story 2 is independently functional and manually verifiable.
 
@@ -90,12 +90,12 @@
 
 ### Implementation for User Story 3
 
-- [ ] T024 [P] [US3] Implement template picker component for todo create flow in src/components/todos/TemplatePicker.tsx
-- [ ] T025 [P] [US3] Implement template-to-form prefill mapper with editable override behavior in src/features/todos/templatePrefill.ts
-- [ ] T026 [US3] Integrate optional template selection into todo form flow in src/components/todos/TodoForm.tsx
-- [ ] T027 [US3] Persist nullable templateId and ignore invalid template payloads in src/storage/todoRepository.ts
-- [ ] T028 [US3] Implement empty/invalid template fallback to manual creation in src/app/(tabs)/todos.tsx
-- [ ] T029 [US3] Document manual E2E checklist for template select/prefill/edit/save/restart in specs/001-todo-theme-tabs/checklists/e2e-us3.md
+- [x] T024 [P] [US3] Implement template picker component for todo create flow in src/components/todos/TemplatePicker.tsx
+- [x] T025 [P] [US3] Implement template-to-form prefill mapper with editable override behavior in src/features/todos/templatePrefill.ts
+- [x] T026 [US3] Integrate optional template selection into todo form flow in src/components/todos/TodoForm.tsx
+- [x] T027 [US3] Persist nullable templateId and ignore invalid template payloads in src/storage/todoRepository.ts
+- [x] T028 [US3] Implement empty/invalid template fallback to manual creation in src/app/(tabs)/todos.tsx
+- [x] T029 [US3] Document manual E2E checklist for template select/prefill/edit/save/restart in specs/001-todo-theme-tabs/checklists/e2e-us3.md
 
 **Checkpoint**: User Story 3 is independently functional and manually verifiable.
 
@@ -109,10 +109,10 @@
 
 ### Implementation for User Story 4
 
-- [ ] T030 [P] [US4] Implement read-only completed history list component in src/components/settings/CompletedHistoryList.tsx
-- [ ] T031 [US4] Integrate completed history section with empty-state handling in src/app/(tabs)/settings.tsx
-- [ ] T032 [US4] Persist and expose completion metadata for history context in src/storage/todoRepository.ts
-- [ ] T033 [US4] Document manual E2E checklist for completed-history visibility/restart in specs/001-todo-theme-tabs/checklists/e2e-us4.md
+- [x] T030 [P] [US4] Implement read-only completed history list component in src/components/settings/CompletedHistoryList.tsx
+- [x] T031 [US4] Integrate completed history section with empty-state handling in src/app/(tabs)/settings.tsx
+- [x] T032 [US4] Persist and expose completion metadata for history context in src/storage/todoRepository.ts
+- [x] T033 [US4] Document manual E2E checklist for completed-history visibility/restart in specs/001-todo-theme-tabs/checklists/e2e-us4.md
 
 **Checkpoint**: User Story 4 is independently functional and manually verifiable.
 
@@ -122,11 +122,11 @@
 
 **Purpose**: Final quality and consistency checks across all stories.
 
-- [ ] T034 [P] Audit text scaling and contrast compliance across theme modes in src/theme/accessibilityAudit.md
-- [ ] T035 [P] Remove hardcoded colors and enforce shared token usage in src/app/(tabs)/todos.tsx
-- [ ] T036 [P] Remove hardcoded colors and enforce shared token usage in src/app/(tabs)/settings.tsx
-- [ ] T040 Add manual E2E error-journey coverage (empty title, invalid/unavailable date, corrupted theme preference fallback, empty template catalog fallback, invalid template payload fallback, unknown templateId restore) in specs/001-todo-theme-tabs/checklists/verification-summary.md
-- [ ] T037 Consolidate final manual verification outcomes for all stories in specs/001-todo-theme-tabs/checklists/verification-summary.md
+- [x] T034 [P] Audit text scaling and contrast compliance across theme modes in src/theme/accessibilityAudit.md
+- [x] T035 [P] Remove hardcoded colors and enforce shared token usage in src/app/(tabs)/todos.tsx
+- [x] T036 [P] Remove hardcoded colors and enforce shared token usage in src/app/(tabs)/settings.tsx
+- [x] T040 Add manual E2E error-journey coverage (empty title, invalid/unavailable date, corrupted theme preference fallback, empty template catalog fallback, invalid template payload fallback, unknown templateId restore, AsyncStorage failure -> in-memory continuity) in specs/001-todo-theme-tabs/checklists/verification-summary.md
+- [x] T037 Consolidate final manual verification outcomes for all stories in specs/001-todo-theme-tabs/checklists/verification-summary.md
 
 ---
 

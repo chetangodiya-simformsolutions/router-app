@@ -31,6 +31,7 @@ Extend the current todo feature with predefined data templates inside the Todos 
 - Extend persisted todo schema with nullable templateId.
 - Define backward-compatible restore for existing todos without template metadata.
 - Define behavior for unknown templateId during restore.
+- Define runtime fallback behavior to in-memory state (`useState`) when AsyncStorage is unavailable/failing.
 - Dependency: Phase 4.
 
 6. Phase 6 - UI integration roadmap
@@ -51,6 +52,7 @@ Extend the current todo feature with predefined data templates inside the Todos 
 - complete/delete lifecycle
 - restart persistence recovery
 - theme switching and readability
+- AsyncStorage failure simulation -> in-session todo actions continue via in-memory state
 - Dependency: Phase 7.
 
 ## Relevant Files
@@ -68,9 +70,21 @@ Extend the current todo feature with predefined data templates inside the Todos 
 3. Confirm plan preserves exactly two primary tabs and unchanged Settings responsibilities.
 4. Confirm persistence/migration behavior is defined for both new and existing todo records.
 5. Confirm verification section contains manual/E2E checks only and no test-writing deliverables.
+6. Confirm AsyncStorage-failure fallback behavior is defined and verified for in-session continuity.
 
 ## Decisions
 
 - Included: predefined built-in templates only.
 - Excluded: user-managed template CRUD, additional tabs/screens, new package/framework additions, and writing tests in this phase.
 - Retained: due date is date-only; completed history remains read-only.
+
+## Post-Implementation Stability Update
+
+- Issue observed: todos could be persisted but not immediately visible in the active list when UI depended only on storage reload timing.
+- Mitigation applied: state synchronization in `src/state/AppContext.tsx` now uses immediate local list updates after create/delete/complete actions, with persistence still written to storage.
+- Verification requirement added: each save action must show the new todo instantly in the active list and remain visible after app restart.
+
+## Component Reuse Rationale Links
+
+- Reuse audit artifact: `/specs/001-todo-theme-tabs/checklists/component-reuse-audit.md`
+- New component justifications are documented for `ActiveTodoItem`, `DueDateField`, `TemplatePicker`, `TodoForm`, `ThemeSelector`, and `CompletedHistoryList`.

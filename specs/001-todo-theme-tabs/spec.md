@@ -117,6 +117,7 @@ the same items appear in completed history across restarts.
 - If template catalog data is empty, users must still be able to create todos manually.
 - If a template payload is invalid, that template must be ignored and manual creation must remain available.
 - If a restored todo references an unknown template ID, the todo must still render as a normal todo item.
+- If AsyncStorage is unavailable or fails at runtime, todo create/complete/delete actions must continue using in-memory state (`useState`) for the active session.
 
 ## Requirements *(mandatory)*
 
@@ -145,6 +146,7 @@ the same items appear in completed history across restarts.
 - **FR-017**: Persisted todo records created from templates MUST include an optional `templateId` field.
 - **FR-018**: If template data is unavailable or invalid, the app MUST fall back to manual creation without blocking users.
 - **FR-019**: This feature MUST NOT introduce new frameworks or packages.
+- **FR-020**: If AsyncStorage read/write fails, the app MUST fall back to in-memory state (`useState`) so todo interactions continue in the current session without app crash.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -193,3 +195,4 @@ the same items appear in completed history across restarts.
 - **SC-006**: At least 90% of users can create a todo from a predefined template in under 20 seconds on first attempt.
 - **SC-007**: In acceptance validation, 100% of template-derived todos remain restorable after app restart.
 - **SC-008**: Manual creation succeeds in 100% of cases when template data is empty or unavailable.
+- **SC-009**: In resilience checks, 100% of todo create/complete/delete interactions remain usable during an active session when AsyncStorage is intentionally unavailable.
