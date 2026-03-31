@@ -11,6 +11,9 @@
 
 - Q: Should completed todo history in Settings allow edits/deletes or be view-only? → A: Completed history is read-only (view only).
 - Q: Should todo scheduling store date only or date+time? → A: Store and show due date only (no time).
+- Q: What does "new template" mean for this feature? → A: Predefined todo data templates users can pick during todo creation.
+- Q: Can new packages or frameworks be introduced? → A: No, use only the existing project stack.
+- Q: Should this phase include writing tests? → A: No, do not add test-writing tasks in this phase.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -61,7 +64,31 @@ update plus persistence after closing and reopening the app.
 
 ---
 
-### User Story 3 - Review Completed Todo History (Priority: P3)
+### User Story 3 - Create Todo From Template (Priority: P2)
+
+As a user, I can choose a predefined todo template in the Todos tab so I can create common tasks
+faster.
+
+**Why this priority**: Template-based creation improves speed and consistency for repeated task
+patterns while staying in the core task flow.
+
+**Independent Test**: Can be fully tested by selecting a template, verifying prefilled fields,
+editing values, saving the todo, and confirming persistence after restart.
+
+**Acceptance Scenarios**:
+
+1. **Given** a user opens the create flow in Todos, **When** they select a predefined template,
+  **Then** the create form is prefilled with template values.
+2. **Given** a user selected a template, **When** they edit any prefilled field before save,
+  **Then** the saved todo reflects user edits.
+3. **Given** a user skips template selection, **When** they create a todo manually,
+  **Then** creation succeeds with no template dependency.
+4. **Given** a template-derived todo is created, **When** the app restarts,
+  **Then** the todo restores correctly with valid persisted metadata.
+
+---
+
+### User Story 4 - Review Completed Todo History (Priority: P3)
 
 As a user, I can view previously completed todos in the Settings tab so I can track what I already
 finished.
@@ -87,6 +114,9 @@ the same items appear in completed history across restarts.
 - If completed history is empty, the Settings history area must show an empty-state message.
 - If a user changes device theme while app theme is set to Device Default, the app must reflect
   the new theme without requiring manual reset.
+- If template catalog data is empty, users must still be able to create todos manually.
+- If a template payload is invalid, that template must be ignored and manual creation must remain available.
+- If a restored todo references an unknown template ID, the todo must still render as a normal todo item.
 
 ## Requirements *(mandatory)*
 
@@ -109,6 +139,12 @@ the same items appear in completed history across restarts.
   and restore persisted state) MUST be defined as end-to-end acceptance scenarios.
 - **FR-013**: User-facing UI for this feature MUST consume shared theme primitives rather than
   hardcoded per-screen values.
+- **FR-014**: The Todos tab MUST provide a predefined catalog of todo data templates in the create flow.
+- **FR-015**: Selecting a template MUST prefill todo creation fields, and those fields MUST remain editable before save.
+- **FR-016**: Users MUST be able to create todos without selecting a template.
+- **FR-017**: Persisted todo records created from templates MUST include an optional `templateId` field.
+- **FR-018**: If template data is unavailable or invalid, the app MUST fall back to manual creation without blocking users.
+- **FR-019**: This feature MUST NOT introduce new frameworks or packages.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -118,6 +154,10 @@ the same items appear in completed history across restarts.
   Light, Dark, or Device Default.
 - **Completed History Record**: Represents a completed todo entry shown in history,
   including task identity and completion context.
+- **Todo Template**: Represents a predefined creation preset with display name and default values
+  used to prefill new todo fields.
+- **Template Selection State**: Represents currently selected template in the create flow,
+  nullable when users choose manual creation.
 
 ## Assumptions
 
@@ -125,6 +165,16 @@ the same items appear in completed history across restarts.
 - Completed-history entries are read-only in Settings and are not editable from history view.
 - Device Default means app appearance tracks device-level light/dark setting dynamically.
 - The app targets a single local user profile on a device.
+- Only built-in predefined templates are in scope for this release.
+- Template values prefill fields but do not lock fields; users can edit before save.
+- No template management UI is included in this release.
+
+## Constitution Check
+
+- TypeScript + Expo + Expo Router stack is retained with no framework substitutions.
+- Theme-ready UI requirement is retained through shared theme primitives.
+- Persistence-by-default requirement covers todos, completed history, theme preference, and template-derived metadata.
+- Verification remains end-to-end journey oriented; no unit-test quality gate is introduced.
 
 ## Success Criteria *(mandatory)*
 
@@ -140,3 +190,6 @@ the same items appear in completed history across restarts.
   remain available after app restart.
 - **SC-005**: At least 90% of participants report text readability as acceptable or better under
   both Light and Dark themes at default and increased text size settings.
+- **SC-006**: At least 90% of users can create a todo from a predefined template in under 20 seconds on first attempt.
+- **SC-007**: In acceptance validation, 100% of template-derived todos remain restorable after app restart.
+- **SC-008**: Manual creation succeeds in 100% of cases when template data is empty or unavailable.

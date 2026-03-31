@@ -33,4 +33,5 @@
 
 - Validation iteration 1: Passed all checklist items.
 - No unresolved clarifications remain.
-- Spec is ready for `/speckit.plan`.
+- Validation iteration 2 (2026-03-31): Spec updated with template scope and still passes checklist gates.
+- Spec is ready for `/speckit.plan` and task generation.
